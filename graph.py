@@ -22,11 +22,53 @@ class Graph():
 			del self._graph[node]
 		except KeyError: pass
 
+	def hasPathDFS(self, source, destination):
+		visited = set()
+		self._hasPathDFS(source, destination, visited) 
+
+	def _hasPathDFS(self, source, destination, visited): 
+		if source == destination: 
+			return True 
+
+		if source in visited == True: 
+			return False 
+
+		visited.add(source)
+		for node in self._graph[source]: 
+			return self._hasPathDFS(node, destination, visited)
+
+		return False 
+
+	def hasPathBFS(self, source, destination): 
+		listToLook = [] 
+		visited = set()
+		listToLook.append(source)
+
+		while len(listToLook) != 0: 
+			node = listToLook[0]
+			del listToLook[0]
+
+			print(len(listToLook))
+			if node == destination: 
+				return True
+
+			if node in visited: 
+				continue 
+
+			visited.add(node) 
+
+			for child in self._graph[node]:
+				listToLook.append(child) 
+
+		return False 
+
+
+
 connections = [('A','B'),('C','B'),('B','D'),
 	('E','F'),('F','C'),('A','C')]
 
 graph = Graph(connections) 
 print(graph._graph)
-
+print(graph.hasPathBFS('A','D'))
 
 
