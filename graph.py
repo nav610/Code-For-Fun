@@ -24,18 +24,21 @@ class Graph():
 
 	def hasPathDFS(self, source, destination):
 		visited = set()
-		self._hasPathDFS(source, destination, visited) 
+		return self._hasPathDFS(source, destination, visited) 
+
 
 	def _hasPathDFS(self, source, destination, visited): 
 		if source == destination: 
 			return True 
 
-		if source in visited == True: 
-			return False 
+		if source in visited: 
+			return False
 
 		visited.add(source)
+
 		for node in self._graph[source]: 
 			return self._hasPathDFS(node, destination, visited)
+
 
 		return False 
 
@@ -48,7 +51,6 @@ class Graph():
 			node = listToLook[0]
 			del listToLook[0]
 
-			print(len(listToLook))
 			if node == destination: 
 				return True
 
@@ -64,11 +66,11 @@ class Graph():
 
 
 
-connections = [('A','B'),('C','B'),('B','D'),
+#connections = [('A','B'),('C','B'),('B','D'),
 	('E','F'),('F','C'),('A','C')]
 
-graph = Graph(connections) 
-print(graph._graph)
-print(graph.hasPathBFS('A','D'))
+#graph = Graph(connections) 
+#print(graph._graph)
+#print(graph.hasPathDFS('A','D'))
 
 
